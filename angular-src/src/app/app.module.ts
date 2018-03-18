@@ -5,17 +5,18 @@ import { HttpModule } from '@angular/http';
 import {RouterModule, Routes} from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { HomeComponent } from './components/home/home.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { NavbarComponent } from './user/components/navbar/navbar.component';
+import { LoginComponent } from './user/components/login/login.component';
+import { RegisterComponent } from './user/components/register/register.component';
+import { HomeComponent } from './user/components/home/home.component';
+import { DashboardComponent } from './user/components/dashboard/dashboard.component';
+import { ProfileComponent } from './user/components/profile/profile.component';
 
-import { ValidateService } from './services/validate.service';
-import { AuthService } from './services/auth.service';
+import { ValidateService } from './user/services/validate.service';
+import { AuthService } from './user/services/auth.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './user/guards/auth.guard';
+
 
 const appRoutes: Routes =  [
   {path:'', component: HomeComponent},
@@ -33,7 +34,8 @@ const appRoutes: Routes =  [
     RegisterComponent,
     HomeComponent,
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+
   ],
   imports: [
     BrowserModule,
