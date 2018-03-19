@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ValidateService } from '../../services/validate.service';
-import { AuthService } from '../../services/auth.service';
+import { UserserviceService } from '../../services/userservice.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-register',
@@ -17,13 +18,13 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private validateService: ValidateService,
-    private authService: AuthService,
+    private authService: UserserviceService,
     private router: Router,
-    private flashMessage: FlashMessagesService) { }
+    private flashMessage: FlashMessagesService,
+) { }
 
   ngOnInit() {
   }
-
   onRegisterSubmit() {
     const user = {
       name: this.name,

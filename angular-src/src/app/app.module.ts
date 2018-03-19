@@ -13,10 +13,13 @@ import { DashboardComponent } from './user/components/dashboard/dashboard.compon
 import { ProfileComponent } from './user/components/profile/profile.component';
 
 import { ValidateService } from './user/services/validate.service';
-import { AuthService } from './user/services/auth.service';
+import { UserserviceService } from './user/services/userservice.service';
+
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './user/guards/auth.guard';
 
+import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
 
 const appRoutes: Routes =  [
   {path:'', component: HomeComponent},
@@ -25,6 +28,22 @@ const appRoutes: Routes =  [
   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]}
 ]
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("49584688005-uqs3fvvhm3jephtjkd74m41lct1m3815.apps.googleusercontent.com")
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("Facebook-App-Id")
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
+
 
 @NgModule({
   declarations: [
@@ -41,10 +60,13 @@ const appRoutes: Routes =  [
     BrowserModule,
     FormsModule,
     HttpModule,
+    SocialLoginModule,
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule.forRoot()
   ],
-  providers: [ValidateService, AuthService, AuthGuard],
+  providers: [ValidateService, UserserviceService, AuthGuard, { provide: AuthServiceConfig,
+    useFactory: provideConfig
+  } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

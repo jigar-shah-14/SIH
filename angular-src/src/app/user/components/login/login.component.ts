@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { UserserviceService } from '../../services/userservice.service';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+
 
 @Component({
   selector: 'app-login',
@@ -13,13 +14,19 @@ export class LoginComponent implements OnInit {
   password: String;
 
   constructor(
-    private authService: AuthService,
+    private authService: UserserviceService,
     private router: Router,
-    private flashMessage: FlashMessagesService) { }
+    private flashMessage: FlashMessagesService,
+    ) { }
 
   ngOnInit() {
   }
-
+  SignInFacebook(){
+    this.authService.signInWithFB();
+  }
+  SignInGoogle(){
+    this.authService.signInWithGoogle();
+  }
   onLoginSubmit() {
     const user = {
       username: this.username,
